@@ -19,12 +19,18 @@ public class MedicalStoreGUI extends JFrame {
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Set Background Image and Scale it to fit the screen
-        JLabel backgroundLabel = new JLabel(new ImageIcon(
-                new ImageIcon(
+        // Set Background Image
+        setContentPane(new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                // Scale the image to fit the screen size
+                Image backgroundImage = new ImageIcon(
                         "C:\\Users\\mohammed luqmaan\\OneDrive\\Desktop\\MedicalStoreManagement\\resources\\bg2.jpg")
-                        .getImage().getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH)));
-        setContentPane(backgroundLabel);
+                        .getImage();
+                g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+            }
+        });
         setLayout(new CardLayout());
 
         mainPanel = new JPanel(new BorderLayout());
@@ -48,8 +54,8 @@ public class MedicalStoreGUI extends JFrame {
         GridBagConstraints gbc = new GridBagConstraints();
 
         JLabel titleLabel = new JLabel("ALL NEEDS MEDICAL STORE");
-        titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 28));
-        titleLabel.setForeground(new Color(59, 155, 111)); // Soft green color for the title
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        titleLabel.setForeground(new Color(34, 139, 34));
         gbc.gridx = 0;
         gbc.gridy = 0;
         topPanel.add(titleLabel, gbc);
@@ -85,8 +91,7 @@ public class MedicalStoreGUI extends JFrame {
     private void initTablePanel() {
         tableModel = new DefaultTableModel(new String[] { "ID", "Name", "Manufacturer", "Price", "Stock" }, 0);
         medicineTable = new JTable(tableModel);
-        medicineTable.setFont(new Font("Roboto", Font.PLAIN, 14));
-        medicineTable.setForeground(new Color(51, 51, 51)); // Dark gray text color for table
+        medicineTable.setFont(new Font("Arial", Font.PLAIN, 14));
         medicineTable.setRowHeight(24);
 
         JScrollPane tableScrollPane = new JScrollPane(medicineTable);
@@ -107,8 +112,7 @@ public class MedicalStoreGUI extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = row;
         JLabel label = new JLabel(labelText);
-        label.setFont(new Font("Arial", Font.PLAIN, 14));
-        label.setForeground(new Color(85, 85, 85)); // Soft gray for labels
+        label.setFont(new Font("Arial", Font.BOLD, 14));
         panel.add(label, gbc);
 
         gbc.gridx = 1;
@@ -119,8 +123,8 @@ public class MedicalStoreGUI extends JFrame {
 
     private JButton createStyledButton(String text, ActionListener listener) {
         JButton button = new JButton(text);
-        button.setFont(new Font("Arial", Font.BOLD, 16));
-        button.setBackground(new Color(76, 201, 162)); // Fresh teal background for buttons
+        button.setFont(new Font("Arial", Font.BOLD, 14));
+        button.setBackground(new Color(0, 123, 255));
         button.setForeground(Color.WHITE);
         button.setFocusPainted(false);
         button.addActionListener(listener);
